@@ -1,3 +1,8 @@
+2021.11.25
+==========
+
+In `__init__.py` change `sort(cmp=...)` into `sort(key=...)` for Python 3
+
 pysvg2font
 ==========
 
