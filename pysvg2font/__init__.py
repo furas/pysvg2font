@@ -1,4 +1,4 @@
-__version_info__ = (0, 0, 1)
+__version_info__ = (0, 0, 2)
 __version__ = '.'.join(map(str, __version_info__))
 
 import sys
@@ -8,7 +8,7 @@ import glob
 try:
     import fontforge
 except :
-    sys.stderr.write("fontforge package not found in the python path")
+    sys.stderr.write("`fontforge` package not found in the python path.\nOn Linux Ubuntu/Debian it may need to install `apt install python3-fontforge`.\nIt may need also to install program `FontForge` using `apt install fontforge`")
     sys.exit(1)
     
 
@@ -94,7 +94,8 @@ class SvgToFontGenerator():
         svg_files = [SvgFile(file_path, self.use_svg_dirname_as_prefix) 
                      for file_path in file_paths]
         
-        svg_files.sort(cmp=lambda a, b: a.name.lower() > b.name.lower)
+        #svg_files.sort(cmp=lambda a, b: a.name.lower() > b.name.lower())  # Python 2
+        svg_files.sort(key=lambda a: a.name.lower(), reverse=True)  # Python 3
         return svg_files
          
     def generate(self):
